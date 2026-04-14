@@ -15,6 +15,14 @@ app.get('/alunos', (req, res) => {
   ]);
 });
 
+app.get('/professores', (req, res) => {
+  res.json([
+    { nome: "João" },
+    { nome: "Roberta" },
+    { nome: "Patrícia" }
+  ]);
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
