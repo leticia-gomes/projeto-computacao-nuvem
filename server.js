@@ -23,6 +23,14 @@ app.get('/professores', (req, res) => {
   ]);
 });
 
+app.get('/cursos', (req, res) => {
+  res.json([
+    { nome: "ADS" },
+    { nome: "Direito" },
+    { nome: "Sistemas de Informação" }
+  ]);
+});
+
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
