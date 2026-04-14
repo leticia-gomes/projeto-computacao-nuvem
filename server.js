@@ -1,7 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
+const apiKey = process.env.API_KEY;
+
+app.use((req, res, next) => {
+  console.log(`Rota acessada: ${req.url}`);
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send('🚀 API rodando na nuvem!');
@@ -45,7 +53,13 @@ app.get('/admin', (req, res) => {
   res.send("Área segura");
 });
 
-app.use((req, res, next) => {
-  console.log(`Rota acessada: ${req.url}`);
-  next();
+app.get('/segredo', (req, res) => {
+  const token = req.headers.authorization;
+
+  if (token !== process.env.API_KEY) {
+    return res.status(401).send("Não autorizado");
+  }
+
+  res.send("Acesso permitido");
 });
+
